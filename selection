@@ -1,0 +1,30 @@
+//selection sort
+#include<stdio.h>
+int main(){
+    int n;
+    printf("Enter the size of array:\n");
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++){
+        printf("Enter the element %d:\n",i);
+        scanf("%d",&arr[i]);
+    }
+    for(int j=0;j<n-1;j++){
+        int min =j;
+        for (int k=j+1;k<n;k++){
+            if (arr[k]<arr[min]){
+                min=k;
+            }
+        }
+        if (min!=j){
+            int temp;
+            temp=arr[j];
+            arr[j]=arr[min];
+            arr[min]=temp;
+        }
+    }
+    for(int m=0;m<n;m++){
+        printf("%d ",arr[m]);
+    }
+    return 0;  
+}
