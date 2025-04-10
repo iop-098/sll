@@ -1,0 +1,168 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+void del_beg(struct node **headref){
+    struct node *temp;
+    temp = (*headref);
+    if (temp == NULL){
+        printf("List is empty");
+    }
+else{
+    (*headref) = temp->next;
+    free(temp);
+}
+}
+
+void del_end(struct node **headref){
+    struct node *temp,*prev;
+    temp = (*headref);
+    if (temp == NULL){
+        printf("List is empty");
+    }
+    else{
+        while(temp->next!=NULL){
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=NULL;
+        free(temp);    
+    }
+    
+}
+
+void del_rand(struct node **headref){
+    struct node *temp,*prev;
+    int pos;
+    temp = (*headref);
+    printf("Enter the positiion of node to be deleted:\n");
+    scanf("%d",&pos);
+    if (temp == NULL){
+        printf("List is empty");
+        }
+    else{
+        for (int i=1;i<pos;i++){
+            prev=temp;
+            temp=temp->next;
+    }
+    prev->next=temp->next;
+    free(temp);
+}
+}
+
+void display(struct node **headRef){
+        struct node *newNode, *temp;
+        temp = *headRef;
+    printf("Linked list after insertion:\n");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+
+}
+
+void ins_rand(struct node **headRef) { 
+        struct node *newNode, *temp;
+        int pos;
+        temp = *headRef; 
+        newNode = (struct node*)malloc(sizeof(struct node));
+        printf("Enter the data of new node\n");
+        scanf("%d", &newNode->data);
+        printf("Enter the position of new node\n");
+        scanf("%d", &pos);
+        for(int i=1; i<pos; i++) {
+                temp = temp->next;
+        }
+        newNode->next=temp->next;
+        temp->next = newNode;
+        
+    }
+void ins_beg(struct node **headRef) { 
+        struct node *newNode, *temp;
+        temp = *headRef; 
+        newNode = (struct node*)malloc(sizeof(struct node));
+        printf("Enter the data of new node\n");
+        scanf("%d", &newNode->data);
+        newNode->next = *headRef;
+        *headRef=newNode;
+    }
+
+void ins_end(struct node **headRef) { 
+    struct node *newNode, *temp;
+    temp = *headRef; 
+    newNode = (struct node*)malloc(sizeof(struct node));
+    printf("Enter the data of new node\n");
+    scanf("%d", &newNode->data);
+    newNode->next = NULL;
+
+    while ( temp->next != NULL) {
+        temp = temp->next;
+    }
+        temp->next = newNode;
+    
+}
+
+void main() {
+    struct node *head = NULL, *newNode, *temp1;
+    int choice = 1;
+
+    while (choice) {
+        newNode = (struct node*)malloc(sizeof(struct node));
+
+        printf("Enter data: \n");
+        scanf("%d", &newNode->data);
+
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = temp1 = newNode;
+        } else {
+            temp1->next = newNode;
+            temp1 = newNode;
+        }
+
+        printf("Do you want to continue (0/1)?\n");
+        scanf("%d", &choice);
+    }
+    int x,k=1;
+    while(k){
+    printf("1:Insertion in the beginning \n2:Insertion at random position\n3:Insertion at the end \n4:Deletion at the beg \n5:Deletion at the end \n6:Deletion at the random Position \n7:For display\n");
+    scanf("%d",&x);
+    switch (x)
+    {
+    case 1:
+        ins_beg(&head);
+        break;
+    case 2:
+        ins_rand(&head);
+        break;    
+    case 3:
+        ins_end(&head);
+        break;
+    case 4:
+    del_beg(&head);
+        break; 
+    case 5:
+    del_end(&head);
+        break; 
+    case 6:
+    del_rand(&head);
+        break; 
+    case 7:
+        
+        display(&head);
+        break; 
+    default:
+    printf("Invalid choice\n");
+        break;
+    }
+    printf("Do you want to continue (0/1)?\n");
+    scanf("%d",&k);
+}
+}
