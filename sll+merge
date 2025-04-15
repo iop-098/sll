@@ -149,8 +149,10 @@ void mergeSort(struct node** headRef) {
 }
  void main() {
      struct node *head = NULL, *newNode, *temp;
-     int choice = 1;
- 
+     int choice;
+     printf("Enter the no. of nodes you want to enter:\n");
+     scanf("%d", &choice);
+     
      while (choice) {
          newNode = (struct node*)malloc(sizeof(struct node));
  
@@ -165,9 +167,8 @@ void mergeSort(struct node** headRef) {
              temp = newNode;
          }
  
-         printf("Do you want to continue (0/1)?\n");
-         scanf("%d", &choice);
-     }
+         choice--;
+        }
      int x,k=1;
      while(k){
      printf("1:Insertion in the beginning \n2:Insertion at random position\n3:Insertion at the end \n4:Deletion at the beg \n5:Deletion at the end \n6:Deletion at the random Position \n7:For display\n8:For Sorting\n");
