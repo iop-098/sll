@@ -1,0 +1,80 @@
+#include <stdio.h>
+#define SIZE 100
+
+int queue[SIZE];
+int front = -1;
+int rear = -1;
+
+int isEmpty() {
+    return front == -1;
+}
+
+int isFull() {
+    return rear == SIZE - 1;
+}
+
+void enqueue(int value) {
+    if (isFull()) {
+        printf("Queue is full\n");
+        return;
+    }
+
+    if (isEmpty())
+        front = 0;
+
+    rear++;
+    queue[rear] = value;
+}
+
+int dequeue() {
+    if (isEmpty()) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+
+    int removed = queue[front];
+
+    if (front == rear) {
+        front = -1;
+        rear = -1;
+    } else {
+        front++;
+    }
+
+    return removed;
+}
+
+int peek() {
+    if (isEmpty()) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+
+    return queue[front];
+}
+
+void display() {
+    if (isEmpty()) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    for (int i = front; i <= rear; i++)
+        printf("%d ", queue[i]);
+
+    printf("\n");
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    display();
+
+    printf("Dequeued: %d\n", dequeue());
+    display();
+
+    printf("Front element: %d\n", peek());
+
+    return 0;
+}
